@@ -1,0 +1,35 @@
+<tal:condition condition='view/data'>
+  <div tal:repeat="item view/data">
+    <p>${item}</p>
+    <img src='${python: view.data[item]}/@@images/image/preview'>
+  </div>
+
+  功能選項：
+  <select id=''>
+    <option >難燃</option>
+    <option>防潑水</option>
+  </select>
+
+  顏色選項：
+  <select id=''>
+    <option >紅色</option>
+    <option>藍色</option>
+  </select>
+
+  現有規格：
+  <select id=''>
+    <option >300d/48f</option>
+    <option>450d/55f</option>
+  </select>
+
+  <label>
+    姓名：<input id='custom_name'>
+  </label>
+
+  <button id='send_btn'>寄出</button>
+
+</tal:condition>
+
+<tal:condition condition='not: view/data'>
+  <h1>No Data</h1>
+</tal:condition>

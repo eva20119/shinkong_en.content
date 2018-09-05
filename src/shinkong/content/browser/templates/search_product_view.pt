@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-on="http://vuejs.org"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="gct.content">
+<body>
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<select id='select_type'>
+  <option value='normal'>一般工業用紗</option>
+  <option value='hmls'>HMLS</option>
+</select>
+<br>
+High Tenacity<input type='number' min='0' id='high_tenacity' step='0.1'>
+Elongation<input type='number' min='0' id='elongation'>
+H.A.S(2)<input type='number' min='0' id='has2' step='0.1'>
+
+<button id='search_btn'>Search</button>
+
+<div id='result'></div>
+<script>
+$(function(){
+    $('#search_btn').click(function(){
+        select_type = $('#select_type').val()
+        high_tenacity = $('#high_tenacity').val()
+        elongation = $('#elongation').val()
+        has2 = $('#has2').val()
+        data = {
+            'select_type': select_type,
+            'high_tenacity': high_tenacity,
+            'elongation': elongation,
+            'has2': has2
+        }
+        url = location.href.replace('search_product_view', 'search_product_result')
+        $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            success: function (response) {
+                $('#result').html(response)
+            }
+        });    
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
