@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="shinkong.content.AddCover"
+        title="shinkong.content: Add Cover"
+    />
+
+        
+    <permission
         id="shinkong.content.AddProduct"
         title="shinkong.content: Add Product"
     />
