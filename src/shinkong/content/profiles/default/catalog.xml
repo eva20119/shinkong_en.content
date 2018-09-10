@@ -1,4 +1,43 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
   <!--<column value="my_meta_column"/>-->
+  <index name="index_ht_max" meta_type="FieldIndex">
+    <indexed_attr value="index_ht_max" />
+  </index>
+  <column value="index_ht_max"/>
+
+  <index name="index_ht_min" meta_type="FieldIndex">
+    <indexed_attr value="index_ht_min" />
+  </index>
+  <column value="index_ht_min"/>
+
+  <index name="index_el_max" meta_type="FieldIndex">
+    <indexed_attr value="index_el_max" />
+  </index>
+  <column value="index_el_max"/>
+
+  <index name="index_el_min" meta_type="FieldIndex">
+    <indexed_attr value="index_el_min" />
+  </index>
+  <column value="index_el_min"/>
+
+  <index name="index_h2_max" meta_type="FieldIndex">
+    <indexed_attr value="index_h2_max" />
+  </index>
+  <column value="index_h2_max"/>
+
+  <index name="index_h2_min" meta_type="FieldIndex">
+    <indexed_attr value="index_h2_min" />
+  </index>
+  <column value="index_h2_min"/>
+
+  <index name="index_denier" meta_type="FieldIndex">
+    <indexed_attr value="index_denier" />
+  </index>
+  <column value="index_denier"/>
+
+  <index name="index_filament" meta_type="FieldIndex">
+    <indexed_attr value="index_filament" />
+  </index>
+  <column value="index_filament"/>
 </object>

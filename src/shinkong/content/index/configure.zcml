@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="shinkong.content">
+      <adapter name="index_ht_max" factory=".indexers.index_ht_max" />
+      <adapter name="index_ht_min" factory=".indexers.index_ht_min" />
+      <adapter name="index_el_max" factory=".indexers.index_el_max" />
+      <adapter name="index_el_min" factory=".indexers.index_el_min" />
+      <adapter name="index_h2_max" factory=".indexers.index_h2_max" />
+      <adapter name="index_h2_min" factory=".indexers.index_h2_min" />
+      <adapter name="index_denier" factory=".indexers.index_denier" />
+      <adapter name="index_filament" factory=".indexers.index_filament" />
+</configure>

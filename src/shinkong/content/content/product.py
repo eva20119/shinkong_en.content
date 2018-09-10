@@ -42,6 +42,14 @@ class IProduct(model.Schema):
         title=_(u'H.A.S(2) Difference'),
         required=True
     )
+    denier = schema.Int(
+        title=_(u'denier'),
+        required=True
+    )
+    filament = schema.Int(
+        title=_(u'filament'),
+        required=True
+    )
     image = NamedBlobImage(
         title=_(u"Product Image"),
         required=True,

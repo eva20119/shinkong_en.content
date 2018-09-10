@@ -25,10 +25,19 @@
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
+    
   <browser:page
       name="search_product_result"
       for="*"
       class=".views.SearchProductResult"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="debug_view"
+      for="*"
+      class=".views.DebugView"
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
