@@ -5,13 +5,32 @@
     i18n_domain="shinkong.content">
 
     <browser:viewlet
-        name="banner"
+        name="cover_industry"
         for="shinkong.content.content.cover.ICover"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-        template="cover_banner.pt"
-        class=".viewlet.CoverBanner"
+        template="cover_industry.pt"
+        class=".viewlet.CoverIndustry"
         layer="shinkong.content.interfaces.IShinkongContentLayer"
         permission="zope2.View"
     />
 
+    <browser:viewlet
+        name="cover_polyester"
+        for="shinkong.content.content.cover.ICover"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        template="cover_polyester.pt"
+        class=".viewlet.CoverPolyester"
+        layer="shinkong.content.interfaces.IShinkongContentLayer"
+        permission="zope2.View"
+    />
+
+    <browser:viewlet
+        name="cover_youtube"
+        for="shinkong.content.content.cover.ICover"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        template="cover_youtube.pt"
+        class=".viewlet.CoverYoutube"
+        layer="shinkong.content.interfaces.IShinkongContentLayer"
+        permission="zope2.View"
+    />
 </configure>

@@ -6,8 +6,19 @@ from zope.component import queryUtility
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 
 
-class CoverBanner(base.ViewletBase):
+class CoverIndustry(base.ViewletBase):
     def update(self):
         context = self.context
-        context.industry
-        import pdb; pdb.set_trace()
+        self.industry = context.industry
+
+
+class CoverPolyester(base.ViewletBase):
+    def update(self):
+        context = self.context
+        self.polyester = context.polyester
+
+
+class CoverYoutube(base.ViewletBase):
+    def update(self):
+        context = self.context
+        self.youtubeList = context.getChildNodes()

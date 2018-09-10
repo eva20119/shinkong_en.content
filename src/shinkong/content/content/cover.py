@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone.app.textfield import RichText
 from plone.autoform import directives
-from plone.dexterity.content import Item
+from plone.dexterity.content import Item, Container
 from plone.namedfile import field as namedfile
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
@@ -26,12 +26,20 @@ class ICover(model.Schema):
             source=CatalogSource(Type='product'),
         )
     )
+    polyester = RelationList(
+        title=_(u"polyester relation list"),
+        required=False,
+        value_type=RelationChoice(
+            title=_(u"polyester"),
+            source=CatalogSource(Type='polyester'),
+        )
+    )
 
 
 
 
 
 @implementer(ICover)
-class Cover(Item):
+class Cover(Container):
     """
     """
