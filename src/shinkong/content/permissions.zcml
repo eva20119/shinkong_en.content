@@ -7,6 +7,12 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="shinkong.content.AddPolyester"
+        title="shinkong.content: Add Polyester"
+    />
+
+        
+    <permission
         id="shinkong.content.AddCover"
         title="shinkong.content: Add Cover"
     />
