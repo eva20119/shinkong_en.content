@@ -11,4 +11,5 @@
       <adapter name="index_h2_min" factory=".indexers.index_h2_min" />
       <adapter name="index_denier" factory=".indexers.index_denier" />
       <adapter name="index_filament" factory=".indexers.index_filament" />
+      <adapter name="SearchableText" factory=".indexers.SearchableText_polyester" />
 </configure>

@@ -3,6 +3,9 @@
 
 from plone.indexer.decorator import indexer
 from shinkong.content.content.product import IProduct
+from shinkong.content.content.polyester import IPolyester
+from plone.app.contenttypes.indexers import _unicode_save_string_concat
+from plone.app.contenttypes.indexers import SearchableText
 
 @indexer(IProduct)
 def index_denier(obj):
@@ -36,6 +39,6 @@ def index_h2_max(obj):
 def index_h2_min(obj):
     return obj.has2 - obj.has2_difference
 
-
-
-
+@indexer(IPolyester)
+def SearchableText_polyester(obj): 
+    return _unicode_save_string_concat(SearchableText(obj))

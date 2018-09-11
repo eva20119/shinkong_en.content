@@ -9,7 +9,8 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from email.mime.text import MIMEText
 import json
 import datetime
-
+from email.mime.text import MIMEText
+import re
 
 class DebugView(BrowserView):
     def __call__(self):
@@ -19,9 +20,45 @@ class DebugView(BrowserView):
         import pdb; pdb.set_trace()
 
 
+class SendMail(BrowserView):
+    def __call__(self):
+        body_str ="test test"
+        mime_text = MIMEText(body_str, 'html', 'utf-8')
+        api.portal.send_email(
+            recipient="ah13441673@gmail.com",
+            sender="henry@mingtak.com.tw",
+            subject="test",
+            body=mime_text.as_string(),
+        )
+
+
+class SearchPolyesterView(BrowserView):
+    template = ViewPageTemplateFile('templates/search_polyester_view.pt')
+    def __call__(self):
+        return self.template()
+
+
+class SearchPolyesterResult(BrowserView):
+    template = ViewPageTemplateFile('templates/search_polyester_result.pt')
+    def __call__(self):
+        request = self.request
+        subject = request.get('subject')
+        query = {
+            'portal_type': 'polyester',
+            'review_state': 'published',
+            'SearchableText': '%s*' %subject
+        }
+        self.result = api.content.find(**query)
+
+        return self.template()
+
+
 class SearchProductView(BrowserView):
     template = ViewPageTemplateFile('templates/search_product_view.pt')
     def __call__(self):
+        portal = api.portal.get()
+
+        self.application = api.content.find(context=portal['application'], depth=1)
         return self.template()
 
 

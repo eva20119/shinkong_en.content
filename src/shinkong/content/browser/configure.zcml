@@ -42,4 +42,28 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="search_polyester_result"
+      for="*"
+      class=".views.SearchPolyesterResult"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="search_polyester_view"
+      for="*"
+      class=".views.SearchPolyesterView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="send_mail"
+      for="*"
+      class=".views.SendMail"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
 </configure>
