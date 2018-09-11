@@ -5,4 +5,5 @@
   <object meta_type="Dexterity FTI" name="product"/>
   <object meta_type="Dexterity FTI" name="cover"/>
   <object meta_type="Dexterity FTI" name="polyester"/>
+  <object meta_type="Dexterity FTI" name="category"/>
 </object>

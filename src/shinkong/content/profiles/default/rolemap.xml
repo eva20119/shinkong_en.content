@@ -3,6 +3,14 @@
   <permissions>
   <!-- -*- extra stuff goes here -*- -->
 
+    <permission name="shinkong.content: Add Category" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+
+        
     <permission name="shinkong.content: Add Polyester" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
