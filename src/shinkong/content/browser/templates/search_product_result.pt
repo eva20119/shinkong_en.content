@@ -1,33 +1,32 @@
 <tal:condition condition='view/data'>
-  <div tal:repeat="item view/data">
-    <p>${item}</p>
-    <img src='${python: view.data[item]}/@@images/image/preview'>
-  </div>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
-  功能選項：
-  <select id=''>
-    <option >難燃</option>
-    <option>防潑水</option>
-  </select>
+<form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
+  <div class="g-recaptcha" data-sitekey="6LfTmm8UAAAAAP8Ho_928uv5WjpA5leW0iNbKPEe"></div>
+</form>
 
-  顏色選項：
-  <select id=''>
-    <option >紅色</option>
-    <option>藍色</option>
-  </select>
+<div tal:repeat="item view/data">
+  <p>${item}</p>
+  <img src='${python: view.data[item]}/@@images/image/preview'>
+</div>
 
-  現有規格：
-  <select id=''>
-    <option >300d/48f</option>
-    <option>450d/55f</option>
-  </select>
 
-  <label>
-    姓名：<input id='custom_name'>
-  </label>
 
-  <button id='send_btn'>寄出</button>
+<p id='verify_text' style='display: none'></p>
+<script>
+  var verifyCallback = function(response) {
+    $('#verify_text').text(response)
+  };
+  var onReCaptchaLoad = function() {
+    captchaWidgetId = grecaptcha.render( 'verify', {
+        'sitekey' : '6LfTmm8UAAAAAP8Ho_928uv5WjpA5leW0iNbKPEe',  // required
+        'theme' : 'light',  // optional
+        'callback': 'verifyCallback'  // optional
+    });
+  };
 
+</script>
+  
 </tal:condition>
 
 <tal:condition condition='not: view/data'>

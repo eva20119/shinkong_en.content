@@ -10,8 +10,21 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+<style>
+.childContainer{
+    margin: 10px 0;
+}
+.search_category{
+    color: blue;
+    cursor: pointer;
+    padding-left: 15px;
+}
+</style>
 
-Denier <input type="number" id="denier">
+Denier 
+<select id="denier">
+    <option value="">----請選擇----</option>
+</select>
 
 <div style="display: none" id='optionContainer'>
     Filament
@@ -31,51 +44,74 @@ Denier <input type="number" id="denier">
 
 <div id="left_side" class='col-md-3'>
     <h3>應用產品</h3>
-    <a tal:repeat="item view/application" href="${python: ite}">${item/Title}</a>
+    <h4 tal:repeat="item view/application" data-uid="${item/UID}" class='search_category'>${item/Title}</h4>
 </div>
 
 <div id='result' class='col-md-9'>
-Result
-</div>
 
+</div>
 <script>
 $(function(){
-    $('#denier').change(function () { 
-        val = $(this).val()
-        data = {
-            'denier': val
-        }
+
+    $('#content header').hide()
+    Object.keys(${view/denierDict}).forEach(function(e){
+        $('#denier').append("<option value=" + e + ">" + e + "</option>");
+    })
+
+    $('.search_category').click(function () { 
+        uid = $(this).data()['uid']
+        data = {'uid': uid}
         url = location.href.replace('search_product_view', 'search_product_result')
         $.ajax({
             type: "post",
             url: url,
             data: data,
             success: function (rep) {
-                data = JSON.parse(rep)
-                debugger
-                if(data.length != 0){
-                    $('#optionContainer').show();
-                    $('#filament').html("");
-                    data.forEach(e => {
-                        $('#filament').append("<option value=" + e + ">" + e + "</option>");
-                    });
-                }else{
-                    $('#optionContainer').hide();
-                    $('#result').html("查無資料");
-                }
+                $('#result').html(rep)
             }
-        });
+        }); 
+    });
+    $('#denier').change(function () {
+        denierDict = ${view/denierDict}
+        val = $(this).val()
+        if(denierDict[val]){
+            $('#optionContainer').show();
+            $('#filament').html("");
+            denierDict[val].forEach(e => {
+                $('#filament').append("<option value=" + e + ">" + e + "</option>");
+            });
+        }else{
+            $('#optionContainer').hide();
+        }
     });
     $('#search_btn').click(function(){
         denier = $("#denier").val();
-        select_type = $('#select_type').val()
         high_tenacity = $('#high_tenacity').val()
         elongation = $('#elongation').val()
         has2 = $('#has2').val()
         filament = $("#filament").val()
+
+        count = 0
+        if(!denier){
+            alert('請選擇丹寧數')
+            return 
+        }
+        if(high_tenacity){
+            count += 1
+        }
+        if(elongation){
+            count += 1
+        }
+        if(has2){
+            count += 1
+        }
+        if(count == 0){
+            alert('high_tenacity,elongation,has2請至少填寫一個')
+            return
+        }
+
         data = {
             'filament': filament,
-            'select_type': select_type,
             'high_tenacity': high_tenacity,
             'elongation': elongation,
             'has2': has2,
