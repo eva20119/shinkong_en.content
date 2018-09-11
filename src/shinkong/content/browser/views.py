@@ -12,6 +12,28 @@ import datetime
 from email.mime.text import MIMEText
 import re
 
+
+class CategoryView(BrowserView):
+    template = ViewPageTemplateFile('templates/category_view.pt')
+    def __call__(self):
+        portal = api.portal.get()
+
+        productBrains = api.content.find(context=portal['products'], depth=1, portal_type='product')
+        denierDict = {}
+        for item in productBrains:
+            obj = item.getObject()
+            denier = obj.denier
+            filament = obj.filament
+            if denierDict.has_key(denier):
+                denierDict[denier].append(filament)
+            else:
+                denierDict[denier] = [filament]
+
+        self.denierDict = denierDict
+        self.application = api.content.find(context=portal['application'], depth=1)
+        return self.template()
+
+
 class DebugView(BrowserView):
     def __call__(self):
         request = self.request
@@ -58,6 +80,18 @@ class SearchProductView(BrowserView):
     def __call__(self):
         portal = api.portal.get()
 
+        productBrains = api.content.find(context=portal['products'], depth=1, portal_type='product')
+        denierDict = {}
+        for item in productBrains:
+            obj = item.getObject()
+            denier = obj.denier
+            filament = obj.filament
+            if denierDict.has_key(denier):
+                denierDict[denier].append(filament)
+            else:
+                denierDict[denier] = filament
+
+        self.denierDict = denierDict
         self.application = api.content.find(context=portal['application'], depth=1)
         return self.template()
 
@@ -76,7 +110,6 @@ class SearchProductResult(BrowserView):
 
         productBrains = api.content.find(context=portal['products'], depth=1, portal_type='product')
         data = {}
-
         if denier and not filament:
             filamentList = []
             for product in productBrains:

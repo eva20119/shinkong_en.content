@@ -66,4 +66,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="category_view"
+      for="*"
+      class=".views.CategoryView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
 </configure>

@@ -31,7 +31,7 @@ Denier <input type="number" id="denier">
 
 <div id="left_side" class='col-md-3'>
     <h3>應用產品</h3>
-    <p tal:repeat="item view/application">${item/Title}</p>
+    <a tal:repeat="item view/application" href="${python: ite}">${item/Title}</a>
 </div>
 
 <div id='result' class='col-md-9'>
