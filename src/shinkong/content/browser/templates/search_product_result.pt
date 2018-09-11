@@ -1,21 +1,49 @@
 <tal:condition condition='view/data'>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src='https://www.google.com/recaptcha/api.js?render=explicit&onload=onReCaptchaLoad'></script>
+<style>
+.required_start{
+  color: red;
+  font-size: 20px;
+}
+.email_table input{
+  width: 20%;
+  display: inline-block;
+}
+#send_mail{
+  display: none;
+}
+</style>
+<div class='email_table'>
+    <span class='required_start'>*為必填</span>
+  <div>
+    <span class='required_start'>*</span>
+    Name：First Name<input type="text" id="first_name">
+        Last Name <input type="text" id='last_name'>
+  </div>
+  Company：<input type="text" id="company" >
+  <br>
+  <span class='required_start'>*</span>Email：<input type="email" id="email" >
+  <br>
+  <span class='required_start'>*</span>Country：<input type="text" id="country" >
+  <br>
+  <span class='required_start'>*</span>Phone：<input type="text" id="phone" >
+  <span class='required_start'>*</span>Cell Phone：<input type="text" id="cellphone" >
+  <br>
+  Message：<textarea id="msg" cols="30" rows="10"></textarea>
+  <button id="send_mail">Send Mail</button>
+</div>
 
-<form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
-  <div class="g-recaptcha" data-sitekey="6LfTmm8UAAAAAP8Ho_928uv5WjpA5leW0iNbKPEe"></div>
-</form>
+<div id='verify' ></div>
 
 <div tal:repeat="item view/data">
   <p>${item}</p>
   <img src='${python: view.data[item]}/@@images/image/preview'>
 </div>
 
-
-
 <p id='verify_text' style='display: none'></p>
 <script>
   var verifyCallback = function(response) {
-    $('#verify_text').text(response)
+    $('#send_mail').show()
   };
   var onReCaptchaLoad = function() {
     captchaWidgetId = grecaptcha.render( 'verify', {
@@ -24,7 +52,43 @@
         'callback': 'verifyCallback'  // optional
     });
   };
-
+  $('#send_mail').click(function () { 
+    first_name = $('#first_name').val();
+    last_name = $('#last_name').val();
+    company = $('#company').val();
+    email = $('#email').val();
+    country = $('#country').val();
+    phone = $('#phone').val();
+    cellphone = $('#cellphone').val();
+    msg = $('#msg').val();
+    if(first_name || last_name || email || country || phone || cellphone){
+      alert('必填欄位未填')
+      return
+    }
+    url = location.href.replace('search_product_view', 'send_mail')
+    data = {
+      'first_name': first_name,
+      'last_name': last_name,
+      'company': company,
+      'email': email,
+      'country': country,
+      'phone': phone,
+      'cellphone': cellphone,
+      'msg': msg,
+    }
+    $.ajax({
+      type: "post",
+      url: url,
+      data: data,
+      success: function (response) {
+        if(response == 'success'){
+          alert('寄件成功')
+        }else if(response == 'error'){
+          alert('寄件失敗')
+        }
+      }
+    });
+  });
 </script>
   
 </tal:condition>

@@ -10,8 +10,7 @@ from email.mime.text import MIMEText
 import json
 import datetime
 from email.mime.text import MIMEText
-import re
-
+from db.connect.browser.views import SqlObj
 
 
 class DebugView(BrowserView):
@@ -24,15 +23,29 @@ class DebugView(BrowserView):
 
 class SendMail(BrowserView):
     def __call__(self):
-        body_str ="test test"
-        mime_text = MIMEText(body_str, 'html', 'utf-8')
-        api.portal.send_email(
-            recipient="ah13441673@gmail.com",
-            sender="henry@mingtak.com.tw",
-            subject="test",
-            body=mime_text.as_string(),
-        )
+        request = self.request
 
+        first_name = request.get('first_name')
+        last_name = request.get('last_name')
+        company = request.get('company')
+        phone = request.get('phone')
+        cellphone = request.get('cellphone')
+        msg = request.get('msg')
+        email = request.get('email')
+        country = request.get('country')
+        try:
+        
+            body_str = "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" %(first_name, last_name, company, country, phone, cellphone, email, msg)
+            mime_text = MIMEText(body_str, 'html', 'utf-8')
+            api.portal.send_email(
+                recipient="ah13441673@gmail.com",
+                sender="henry@mingtak.com.tw",
+                subject="意見",
+                body=mime_text.as_string(),
+            )
+            return 'success'
+        except :
+            return 'error'
 
 class SearchPolyesterView(BrowserView):
     template = ViewPageTemplateFile('templates/search_polyester_view.pt')
