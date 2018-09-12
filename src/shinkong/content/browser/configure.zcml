@@ -66,5 +66,12 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="category_inner_view"
+      for="*"
+      class=".views.CategoryInnerView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
 
 </configure>

@@ -6,31 +6,32 @@
     lang="en"
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="gct.content">
-
-<metal:styleslot fill-slot="style_slot">
-  <link href="++plone++shinkong.content/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
-</metal:styleslot>
-
 <body>
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+<style>
+#content header{
+    display: none;
+}
+</style>
 
+<div>
+  <div class='col-md-6' style='text-align: center'>
+    <img src="${view/context/absolute_url}/@@images/image/preview" >
+  </div>
 
-<div tal:repeat="item view/result">
-  <a data-fancybox href="${python: item.getObject().absolute_url()}/@@images/dm/preview">
-      <img src="${python: item.getObject().absolute_url()}/@@images/cover/preview">
-  </a>
+  <div class='col-md-6'>
+    <h3>${view/context/Title}</h3>
+    <h4 style='font-style: italic'>${view/context/description}</h4>
 
-    ${python: item.getObject().title}
-    <br>
+    <p tal:content="structure view/context/text/raw"></p>
+  </div>
+
 </div>
 
-<script src="++plone++shinkong.content/fancybox/dist/jquery.fancybox.min.js"></script>
-
 </metal:content-core>
 </metal:content-core>
-
 
 </body>
 </html>

@@ -1,11 +1,13 @@
-<img src="${view/result/absolute_url}/@@images/image/preview" alt="">
+<img src="${view/result/absolute_url}/@@images/image/large" alt="">
 <h2>${view/result/Title}</h2>
 <h4>${view/result/description}</h4>
 
 <div class="col-md-12">
     <div class="row">
         <div tal:repeat="child view/result/getChildNodes" class='childContainer col-md-12'>
+          <a href="${child/absolute_url}/@@category_inner_view">
             <img src="${child/absolute_url}/@@images/image/mini" class='col-md-4'>
+          </a>
             <div class="col-md-8 content">
                 <h3>${child/Title}</h3>
                 <p>${child/description}</p>

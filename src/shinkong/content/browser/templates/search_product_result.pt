@@ -61,7 +61,7 @@
     phone = $('#phone').val();
     cellphone = $('#cellphone').val();
     msg = $('#msg').val();
-    if(first_name || last_name || email || country || phone || cellphone){
+    if(!first_name || !last_name || !email || !country || !phone || !cellphone){
       alert('必填欄位未填')
       return
     }

@@ -60,7 +60,7 @@ class SearchPolyesterResult(BrowserView):
         subject = request.get('subject')
         query = {
             'portal_type': 'polyester',
-            'review_state': 'published',
+#            'review_state': 'published',
             'SearchableText': '%s*' %subject
         }
         self.result = api.content.find(**query)
@@ -118,8 +118,8 @@ class SearchProductResult(BrowserView):
 
             query = {
                 'context': portal['products'],
-                'portal_type': 'product', 
-                'index_filament' : filament, 
+                'portal_type': 'product',
+                'index_filament' : filament,
                 'index_denier' : denier
             }
             if high_tenacity:
@@ -131,7 +131,7 @@ class SearchProductResult(BrowserView):
                 query['index_h2_min'] = {'query': has2, 'range': 'max'}
                 query['index_h2_max'] = {'query': has2, 'range': 'min'}
             if elongation:
-                elongation = float(elongation)            
+                elongation = float(elongation)
                 query['index_el_min'] = {'query': elongation, 'range': 'max'}
                 query['index_el_max'] = {'query': elongation, 'range': 'min'}
             filterProduct = api.content.find(**query)
@@ -142,3 +142,9 @@ class SearchProductResult(BrowserView):
                 data[productName] = productUrl
             self.data = data if data else False
             return self.template()
+
+
+class CategoryInnerView(BrowserView):
+    template = ViewPageTemplateFile('templates/category_inner_view.pt')
+    def __call__(self):
+        return self.template()
