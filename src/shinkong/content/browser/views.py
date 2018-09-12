@@ -34,7 +34,6 @@ class SendMail(BrowserView):
         email = request.get('email')
         country = request.get('country')
         try:
-        
             body_str = "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s" %(first_name, last_name, company, country, phone, cellphone, email, msg)
             mime_text = MIMEText(body_str, 'html', 'utf-8')
             api.portal.send_email(
@@ -46,6 +45,7 @@ class SendMail(BrowserView):
             return 'success'
         except :
             return 'error'
+
 
 class SearchPolyesterView(BrowserView):
     template = ViewPageTemplateFile('templates/search_polyester_view.pt')
@@ -110,6 +110,12 @@ class SearchProductResult(BrowserView):
         else:
             filament = float(filament)
             denier = float(denier)
+            sqlInstance = SqlObj()
+
+            sqlStr = """INSERT INTO search_log(denier, filament, ht, el, has2) VALUES({}, {}, {}, {}, {})
+                    """.format(denier, filament, high_tenacity, elongation, has2)
+            sqlInstance.execSql(sqlStr)
+
             query = {
                 'context': portal['products'],
                 'portal_type': 'product', 
