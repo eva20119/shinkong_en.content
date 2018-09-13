@@ -1,3 +1,6 @@
+img{
+    width: 100%
+}
 .plone-navbar{
     background: black;
 }
@@ -59,4 +62,26 @@ footer h3{
 .footer_thr p{
     text-align: left;
     margin-bottom: 20px;
+}
+.glyphicon.link-https{
+    height: 480px;
+}
+.hide{
+    display: none;
+}
+.top_icon img{
+    width: 200px;
+}
+#portal-header{
+    margin: 0;
+    padding: 15px;
+    background: white;
+    margin-bottom: 10px;
+}
+#portal-searchbox{
+    display: none;
+}
+#portal-globalnav-wrapper{
+    width: 88%;
+    margin: auto;
 }

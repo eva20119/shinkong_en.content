@@ -6,9 +6,6 @@
     lang="en"
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="gct.content">
-<metal:styleslot fill-slot="style_slot">
-  <link href="++plone++shinkong.content/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
-</metal:styleslot>
 
 <body>
 <metal:content-core fill-slot="content-core">
@@ -21,7 +18,6 @@
 
     <div id='result'></div>
 
-<script src="++plone++shinkong.content/fancybox/dist/jquery.fancybox.min.js"></script>
 <script>
 $(function(){
     $('#send').click(function(){

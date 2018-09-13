@@ -1,0 +1,175 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-on="http://vuejs.org"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="gct.content">
+<body>
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+#content header, #viewlet-below-content{
+    display: none;
+}
+#content{
+    position: relative;
+    margin: 0;
+}
+#youtube_list{
+    position: relative;
+    padding: 10px;
+}
+#youtube_select{
+    text-align: center;
+}
+#youtube_select li{
+    display: inline;
+    font-size: 22px;    
+}
+iframe{
+    width: 90%;
+    height: 400px;
+}
+.row{
+}
+
+#main-container{
+    background: #ccc;
+}
+.polyester_container, .product_container, .banner_container, footer{
+    padding: 15px 8px;
+    background: #fff;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+footer{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+footer.row{
+    display: none;
+}
+.dot{
+    background: black;
+    color: black;
+    border-radius: 100%;
+    padding: 0px 7px;
+    cursor: pointer;
+}
+.dot_select{
+    background: red !important;
+    color: red !important;
+}
+</style>
+<div class="row banner_container">
+   <div class="col-lg-8 col-sm-12" style='text-align: center'>
+     <div id='youtube_list'>
+       <tal:rep repeat="youtube view/youtubeList">
+         <div tal:define="number repeat/youtube/number" id='youtube${number}' 
+              class="${python: 'hide'  if number > 1 else ''}">
+           <p tal:replace="structure python: youtube.getObject().remoteUrl"></p>
+         </div>
+       </tal:rep>
+     </div>
+     <ul id='youtube_select'>
+       <li tal:repeat="youtube view/youtubeList" data-id="youtube${repeat/youtube/number}">
+         <span tal:define="number repeat/youtube/number" class="${python: 'dot' if number > 1 else 'dot dot_select'}">a</span>
+       </li>
+     </ul>
+   </div>
+   <div class="col-lg-4 col-sm-12">
+      <div class="col-lg-12 col-sm-6 right_banner">
+        <a href="${portal_url}/search_product_view">
+           <img src="https://via.placeholder.com/430x240" alt="">
+        </a>
+      </div>
+      <div class="col-lg-12 col-sm-6 right_banner">
+        <a href="${portal_url}/search_polyester_view">
+           <img src="https://via.placeholder.com/430x240" alt="">
+        </a>
+      </div>
+   </div>
+</div>
+
+
+<div class="row product_container">
+  <div class="col-lg-3 col-sm-6" tal:repeat="item python: view.cover.getObject().application" style='text-align: center'>
+    <a href="${portal_url}/search_product_view">
+      <img src="${item/to_object/absolute_url}/@@images/image" style='width: 100%'>${item/to_object/Title}
+    </a>
+  </div>
+</div>
+
+<div class="row polyester_container">
+  <div class="col-lg-3 col-sm-6" tal:repeat="item python: view.cover.getObject().polyester" style='padding: 10px'>
+    <a data-fancybox href="${python: item.to_object.absolute_url()}/@@images/dm/preview" class='polyester_result'>
+        <img src="${python: item.to_object.absolute_url()}/@@images/cover/preview" style='width: 100%'>
+    </a>
+  </div>
+</div>
+
+<?python
+from datetime import datetime
+year = datetime.now().year
+?>
+<footer id="new_footer" style='border: none'>
+                <div class="row">
+<hr style='width: 95%;color: red;background: red;height: 2px;border:none;margin-bottom: 30px'>
+                    <div class="col-lg-4 col-sm-12">
+                        <a href="" class="top_icon">
+                            <img src="https://via.placeholder.com/188x50" alt="">
+                        </a>
+                        <p>永續成長的高科技聚酯產業</p>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 footer_sec">
+                        <h3 style='margin-top:0;margin-bottom: 10px'>聯絡我們</h3>
+                        <ul>
+                            <li>${view/address}
+                                <a href="">
+                                    <span class="icon-gray-triangle"></span>詳細地圖
+                                </a>
+                            </li>
+                            <li>TEL/${view/cellphone}</li>
+                            <li>FAX/${view/fax}</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 footer_thr">
+                        <ul class='site_map'>
+                            <li>網站地圖</li>
+                            <li>/</li>
+                            <li>使用條款</li>
+                            <li>/</li>
+                            <li>隱私權保護說明</li>
+                        </ul>
+                        <p>©${year}新光合成纖維股份有限公司SHINKONG</p>
+                        <div class='footer_container'>
+                            <a href="" class='icon_email'></a>
+                            <a href="" class='icon_sk21'></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+<script>
+$(function(){
+        $('#youtube_select li').click(function(){
+            id = $(this).data()['id']
+            $(this).find('.dot').addClass('dot_select')
+            $(this).siblings().find('.dot').removeClass('dot_select')
+
+            $('#' + id).siblings().fadeOut()
+            setTimeout(function(){
+                $('#' + id).fadeIn()
+            }, 400)
+        })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

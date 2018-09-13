@@ -18,12 +18,12 @@ class ICover(model.Schema):
         title=_(u"Cover"),
         required=True
     )
-    industry = RelationList(
-        title=_(u"industry relation list"),
+    application = RelationList(
+        title=_(u"application relation list"),
         required=False,
         value_type=RelationChoice(
-            title=_(u"industry"),
-            source=CatalogSource(Type='product'),
+            title=_(u"application"),
+            source=CatalogSource(Type='category'),
         )
     )
     polyester = RelationList(

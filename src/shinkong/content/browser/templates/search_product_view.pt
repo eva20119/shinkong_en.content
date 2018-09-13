@@ -134,7 +134,7 @@ $(function(){
             count += 1
         }
         if(count == 0){
-            alert('high_tenacity,elongation,has2請至少填寫一個')
+            alert('長度,伸度,HAS2請至少填寫一個')
             return
         }
 

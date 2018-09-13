@@ -11,6 +11,7 @@ import json
 import datetime
 from email.mime.text import MIMEText
 from db.connect.browser.views import SqlObj
+from db.connect.browser.base_inform_configlet import IInform
 
 
 class DebugView(BrowserView):
@@ -19,6 +20,20 @@ class DebugView(BrowserView):
         context = self.context
         portal = api.portal.get()
         import pdb; pdb.set_trace()
+
+
+class CoverView(BrowserView):
+    template = ViewPageTemplateFile("templates/cover_view.pt")
+    def __call__(self):
+        portal = api.portal.get()
+        self.cover = api.content.find(context=api.portal.get()['cover'], depth=0)[0]
+        self.youtubeList = api.content.find(context=api.portal.get()['cover'], depth=1)
+        self.fax = api.portal.get_registry_record('fax', interface=IInform)
+        self.address = api.portal.get_registry_record('address', interface=IInform)
+        self.cellphone = api.portal.get_registry_record('cellphone', interface=IInform)
+        self.email = api.portal.get_registry_record('email', interface=IInform)
+
+        return self.template()
 
 
 class SendMail(BrowserView):
