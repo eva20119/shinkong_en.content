@@ -15,45 +15,67 @@
     margin: 10px 0;
 }
 .search_category{
-    color: blue;
     cursor: pointer;
     padding-left: 15px;
 }
+#optionContainer input[type='number']{
+    width: 10%;
+    display: inline;
+}
+.documentFirstHeading{
+    display: none;
+}
+#product_container{
+    padding: 10px;
+}
+#left_side h3{
+    border-bottom: 1px solid blue;
+    border-bottom-width: 2px;
+    width: 120px;
+    padding-bottom: 5px;
+}
+#result{
+    margin-top: 30px;
+}
 </style>
 
-Denier 
+<div id='product_container'>
+<span style='color: red;font-size:17px'>*為必填</span>
+<br><br>
+<span style='color: red;font-size:17px'>*</span>
 <select id="denier">
-    <option value="">----請選擇----</option>
+    <option value="">請選擇丹寧數</option>
 </select>
 
 <div style="display: none" id='optionContainer'>
-    Filament
+    <span style='color: red;font-size:17px'>*</span>
     <select name="" id="filament" >
     </select>
-<br>
-    High Tenacity<input type='number' min='0' id='high_tenacity' step='0.1' >
+    <input type='number' min='0' id='high_tenacity' step='0.1' placeholder="強度">
 
-    Elongation<input type='number' min='0' id='elongation' >
+    <input type='number' min='0' id='elongation' placeholder="伸度">
 
-    H.A.S(2)<input type='number' min='0' id='has2' step='0.1' >
+    <input type='number' min='0' id='has2' step='0.1' placeholder="HAS2">
 </div>
 
 <button id='search_btn'>Search</button>
 
 <br>
-
 <div id="left_side" class='col-md-3'>
-    <h3>應用產品</h3>
-    <h4 tal:repeat="item view/application" data-uid="${item/UID}" class='search_category'>${item/Title}</h4>
+  <tal:rep repeat="item view/category_folder">
+    <h3>${item/Title}</h3>
+    <h4 tal:repeat="child python: item.getObject().getChildNodes()" data-uid="${child/UID}"
+        class='search_category'>${child/title}</h4>
+  </tal:rep>
 </div>
 
 <div id='result' class='col-md-9'>
 
 </div>
+</div>
 <script>
 $(function(){
 
-    $('#content header').hide()
     Object.keys(${view/denierDict}).forEach(function(e){
         $('#denier').append("<option value=" + e + ">" + e + "</option>");
     })
@@ -76,7 +98,9 @@ $(function(){
         val = $(this).val()
         if(denierDict[val]){
             $('#optionContainer').show();
+            $('#optionContainer').css('display', 'inline')
             $('#filament').html("");
+            $('#filament').append("<option value=''>根數</option>")
             denierDict[val].forEach(e => {
                 $('#filament').append("<option value=" + e + ">" + e + "</option>");
             });
@@ -95,6 +119,10 @@ $(function(){
         if(!denier){
             alert('請選擇丹寧數')
             return 
+        }
+        if(!filament){
+            alert('請選擇根數')
+            return
         }
         if(high_tenacity){
             count += 1

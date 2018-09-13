@@ -1,0 +1,40 @@
+<footer id='new_footer'>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <a href="" class="top_icon">
+                            <img src="https://via.placeholder.com/188x50" alt="">
+                        </a>
+                        <p>永續成長的高科技聚酯產業</p>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 footer_sec">
+                        <h3>聯絡我們</h3>
+                        <ul>
+                            <li>台北市南京東路2段123號14樓
+                                <a href="">
+                                    <span class="icon-gray-triangle"></span>詳細地圖
+                                </a>
+                            </li>
+                            <li>TEL/(02)2507-1251</li>
+                            <li>FAX/(02)2507-2264</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 footer_thr">
+                        <ul class='site_map'>
+                            <li>網站地圖</li>
+                            <li>/</li>
+                            <li>使用條款</li>
+                            <li>/</li>
+                            <li>隱私權保護說明</li>
+                        </ul>
+<?python
+from datetime import datetime
+year = datetime.now().year
+?>
+                        <p>©${year}新光合成纖維股份有限公司SHINKONG</p>
+                        <div class='footer_container'>
+                            <a href="" class='icon_email'></a>
+                            <a href="" class='icon_sk21'></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>

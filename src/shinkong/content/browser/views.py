@@ -80,12 +80,13 @@ class SearchProductView(BrowserView):
             denier = obj.denier
             filament = obj.filament
             if denierDict.has_key(denier):
-                denierDict[denier].append(filament)
+                if denierDict[denier].count(filament) == 0:
+                    denierDict[denier].append(filament)
             else:
                 denierDict[denier] = [filament]
 
         self.denierDict = denierDict
-        self.application = api.content.find(context=portal['application'], depth=1)
+        self.category_folder = api.content.find(context=portal['category_folder'], depth=1, portal_type='Folder')
         return self.template()
 
 
@@ -135,12 +136,8 @@ class SearchProductResult(BrowserView):
                 query['index_el_min'] = {'query': elongation, 'range': 'max'}
                 query['index_el_max'] = {'query': elongation, 'range': 'min'}
             filterProduct = api.content.find(**query)
-            for item in filterProduct:
-                obj = item.getObject()
-                productUrl = obj.absolute_url()
-                productName = obj.title
-                data[productName] = productUrl
-            self.data = data if data else False
+
+            self.filterProduct = filterProduct if filterProduct else False
             return self.template()
 
 

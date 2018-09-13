@@ -16,8 +16,8 @@
                     tal:define="toc context/table_of_contents|nothing;">
 
 
-    <input type="search" id="subject" value="" placeholder="Search Subject Here..." >
-    <button id='send'>send</button>
+    <input type="search" id="subject" value="" placeholder="Search Subject Here..."  style='display: inline;width: 70%'>
+    <button id='send' style='color: white;background: #3d84a8;padding: 8px;border-radius: 8px;font-size: 18px'>關鍵字搜尋</button>
 
     <div id='result'></div>
 

@@ -1,4 +1,4 @@
-<tal:condition condition='view/data'>
+<tal:condition condition='view/filterProduct'>
 <script src='https://www.google.com/recaptcha/api.js?render=explicit&onload=onReCaptchaLoad'></script>
 <style>
 .required_start{
@@ -13,6 +13,7 @@
   display: none;
 }
 </style>
+
 <div class='email_table'>
     <span class='required_start'>*為必填</span>
   <div>
@@ -35,10 +36,46 @@
 
 <div id='verify' ></div>
 
-<div tal:repeat="item view/data">
-  <p>${item}</p>
-  <img src='${python: view.data[item]}/@@images/image/preview'>
-</div>
+<table>
+  <tal:rep repeat="item view/filterProduct">
+    <tr>
+      <td rowspan=2>Spec.No.</td>
+      <td>Titer</td>
+      <td>Spec.No.</td>
+      <td rowspan=2>Filaments</td>
+      <td>Tenacity</td>
+      <td>Elongation</td>
+      <td>H.A.S(%)</td>
+      <td rowspan=2>EASL</td>
+      <td>paper tube</td>
+      <td>AA</td>
+      <td>TYPE</td>
+    </tr>
+    <tr>
+      <td>(denier)</td>
+      <td>(g/D)</td>
+      <td>(%)</td>
+      <td>177&#176C*2min</td>
+      <td>length(mm)</td>
+      <td>yarn</td>
+      <td>REMARK</td>
+      <td>REMARK</td>
+    </tr>
+    <tr tal:define="obj python: item.getObject()">
+      <td>${python: obj.title}</td>
+      <td>${python: obj.denier}</td>
+      <td>${python: obj.filament}</td>
+      <td>${python: obj.high_tenacity}</td>
+      <td>${python: obj.elongation}</td>
+      <td>${python: obj.has2}</td>
+      <td>${python: obj.easl}</td>
+      <td>${python: obj.ptl}</td>
+      <td>${python: obj.aayarn}</td>
+      <td>${python: obj.type_remark}</td>
+      <td>${python: obj.easl_remark}</td>
+    </tr>
+  </tal:rep>
+</table>
 
 <p id='verify_text' style='display: none'></p>
 <script>
@@ -93,6 +130,6 @@
   
 </tal:condition>
 
-<tal:condition condition='not: view/data'>
+<tal:condition condition='not: view/filterProduct'>
   <h1>No Data</h1>
 </tal:condition>

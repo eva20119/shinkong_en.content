@@ -22,3 +22,8 @@ class CoverYoutube(base.ViewletBase):
     def update(self):
         context = self.context
         self.youtubeList = context.getChildNodes()
+
+
+class NewFooter(base.ViewletBase):
+    def update(self):
+        context = self.context

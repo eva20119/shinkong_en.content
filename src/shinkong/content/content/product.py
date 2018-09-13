@@ -50,6 +50,27 @@ class IProduct(model.Schema):
         title=_(u'filament'),
         required=True
     )
+    easl = schema.TextLine(
+        title=_(u'EASL'),
+        required=False
+    )
+    easl_remark = schema.TextLine(
+        title=_(u'EASL Remark'),
+        required=False
+    )
+    ptl = schema.TextLine(
+        title=_(u'Paper Tube Length(mm)'),
+        required=False
+    )
+    aayarn = schema.Bool(
+        title=_(u'aayarn'),
+        default=False,
+        required=False
+    )
+    type_remark = schema.TextLine(
+        title=_(u'Type Remark'),
+        required=False
+    )
     image = NamedBlobImage(
         title=_(u"Product Image"),
         required=True,
