@@ -53,6 +53,8 @@
   <property name="view_methods">
     <element value="document_view"/>
     <element value="category_inner_view"/>
+    <element value="search_product_view"/>
+    <element value="search_polyester_view"/>
   </property>
 
   <!-- Method aliases -->

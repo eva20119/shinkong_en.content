@@ -19,7 +19,7 @@ body{
 }
 #new_footer{
     text-align: center;
-    margin-top: 30px;
+    margin: 10px -10px 0 -10px;
     width: 100%;
     padding-top: 30px;
     border-top: 2px solid #fb0017;
@@ -63,9 +63,6 @@ footer h3{
     text-align: left;
     margin-bottom: 20px;
 }
-.glyphicon.link-https{
-    height: 480px;
-}
 .hide{
     display: none;
 }
@@ -82,6 +79,45 @@ footer h3{
     display: none;
 }
 #portal-globalnav-wrapper{
-    width: 88%;
     margin: auto;
+    margin-bottom: 10px;
 }
+@media (min-width: 768px){
+    #portal-globalnav-wrapper {
+        width: 720px;
+    }
+}
+@media (min-width: 992px){
+    #portal-globalnav-wrapper, .template-cover_view #new_footer{
+        width: 960px;
+    }
+}
+@media (min-width: 1200px){
+    #portal-globalnav-wrapper, .template-cover_view #new_footer{
+        width: 1140px;
+    }
+}
+@media (min-width: 1600px){
+    #portal-globalnav-wrapper, .template-cover_view #new_footer{
+        width: 1540px;
+    }
+}
+
+.outer-wrapper .container .row{
+    margin: 0;
+}
+.template-cover_view .outer-wrapper .container .row{
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.template-cover_view .outer-wrapper .container .row.banner_container,
+.template-cover_view .outer-wrapper .container .row.product_container{
+    margin-bottom: 10px;
+}
+#new_footer .footer_sec h3{
+    margin-top: 0;
+    font-weight: 600;
+    padding-left: 0;
+}
+

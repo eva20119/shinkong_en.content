@@ -12,30 +12,37 @@
 #send_mail{
   display: none;
 }
+.email_table{
+   text-align: left;
+}
 </style>
 
 <div class='email_table'>
-    <span class='required_start'>*為必填</span>
   <div>
     <span class='required_start'>*</span>
     Name：First Name<input type="text" id="first_name">
         Last Name <input type="text" id='last_name'>
   </div>
+<br>
   Company：<input type="text" id="company" >
-  <br>
+<br>
+<br>
   <span class='required_start'>*</span>Email：<input type="email" id="email" >
-  <br>
+<br>
+<br>
   <span class='required_start'>*</span>Country：<input type="text" id="country" >
-  <br>
+<br>
+<br>
   <span class='required_start'>*</span>Phone：<input type="text" id="phone" >
   <span class='required_start'>*</span>Cell Phone：<input type="text" id="cellphone" >
-  <br>
+<br><br>
   Message：<textarea id="msg" cols="30" rows="10"></textarea>
+<br><br>
   <button id="send_mail">Send Mail</button>
 </div>
 
 <div id='verify' ></div>
-
+<br><br>
 <table>
   <tal:rep repeat="item view/filterProduct">
     <tr>

@@ -1,4 +1,4 @@
-<img src="${view/result/absolute_url}/@@images/image/large" alt="">
+<img src="${view/result/absolute_url}/@@images/image/preview" style="width: unset">
 <h2>${view/result/Title}</h2>
 <h4>${view/result/description}</h4>
 

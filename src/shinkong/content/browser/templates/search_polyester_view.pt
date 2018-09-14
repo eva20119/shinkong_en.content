@@ -11,8 +11,17 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
-
-
+<style>
+.documentFirstHeading{
+    display: none;
+}
+#new_footer .footer_sec h3{
+    margin-top: 0;
+    font-weight: 600;
+    padding-left: 0;
+}
+</style>
+<br><br>
     <input type="search" id="subject" value="" placeholder="Search Subject Here..."  style='display: inline;width: 70%'>
     <button id='send' style='color: white;background: #3d84a8;padding: 8px;border-radius: 8px;font-size: 18px'>關鍵字搜尋</button>
 

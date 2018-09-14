@@ -30,8 +30,8 @@
     font-size: 22px;    
 }
 iframe{
-    width: 90%;
-    height: 400px;
+    width: 96%;
+    height: 450px;
 }
 .row{
 }
@@ -97,8 +97,8 @@ footer.row{
 
 <div class="row product_container">
   <div class="col-lg-3 col-sm-6" tal:repeat="item python: view.cover.getObject().application" style='text-align: center'>
-    <a href="${portal_url}/search_product_view">
-      <img src="${item/to_object/absolute_url}/@@images/image" style='width: 100%'>${item/to_object/Title}
+    <a href="${portal_url}/search_product_view?uid=${python: item.to_object.UID()}">
+      <img src="${item/to_object/absolute_url}/@@images/image" style='height:260px;margin-bottom: 10px'><h3>${item/to_object/Title}</h3>
     </a>
   </div>
 </div>
@@ -128,7 +128,7 @@ year = datetime.now().year
                         <h3 style='margin-top:0;margin-bottom: 10px'>聯絡我們</h3>
                         <ul>
                             <li>${view/address}
-                                <a href="">
+                                <a href="https://www.google.com.tw/maps/search/${view/address}" target="_blank">
                                     <span class="icon-gray-triangle"></span>詳細地圖
                                 </a>
                             </li>
