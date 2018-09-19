@@ -1,8 +1,9 @@
+
 <footer id='new_footer'>
                 <div class="row">
                     <div class="col-lg-4 col-sm-12">
                         <a href="" class="top_icon">
-                            <img src="https://via.placeholder.com/188x50" alt="">
+                            <img src="${view/logo}" alt="">
                         </a>
                         <p>永續成長的高科技聚酯產業</p>
                     </div>

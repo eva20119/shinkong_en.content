@@ -4,6 +4,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from zope.component import queryUtility
 from plone.i18n.normalizer.interfaces import IIDNormalizer
+from Products.CMFPlone.utils import getSiteLogo
 
 
 class CoverIndustry(base.ViewletBase):
@@ -27,3 +28,4 @@ class CoverYoutube(base.ViewletBase):
 class NewFooter(base.ViewletBase):
     def update(self):
         context = self.context
+        self.logo = getSiteLogo()
