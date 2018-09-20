@@ -1,3 +1,9 @@
+.banner_container .right_banner img {
+    width:100%;
+/*    height: 180px;*/
+    padding: 5px 0;
+}
+
 .product_container .item { padding: 10px; text-align: center }
 .product_container .item img { width: 100%;}
 
@@ -9,7 +15,7 @@ article#content { margin-bottom:0}
 .banner_container, .product_container, .polyester_container {
     background: #fff;
     margin: 0 0 10px 0;
-    padding: 8px 8px 40px 8px;
+    padding: 8px;
 }
 .polyester_container { margin-bottom: 0}
 footer#portal-footer-wrapper {

@@ -11,63 +11,6 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<style>
-/*
-#content header, #viewlet-below-content{
-    display: none;
-}
-#content{
-    position: relative;
-    margin: 0;
-}*/
-#youtube_list{
-    position: relative;
-    padding: 10px;
-}
-#youtube_select{
-    text-align: center;
-}
-#youtube_select li{
-    display: inline;
-    font-size: 22px;    
-}
-iframe{
-    width: 96%;
-    height: 450px;
-}
-/*
-.row{
-}
-
-#main-container{
-    background: #ccc;
-}
-.polyester_container, .product_container, .banner_container, footer{
-    padding: 15px 8px;
-    background: #fff;
-    border-radius: 8px;
-    margin: 10px 0;
-}
-footer{
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-footer.row{
-    display: none;
-}
-.dot{
-    background: black;
-    color: black;
-    border-radius: 100%;
-    padding: 0px 7px;
-    cursor: pointer;
-}
-.dot_select{
-    background: red !important;
-    color: red !important;
-}*/
-</style>
-
 <div class="row banner_container">
    <div class="col-lg-8 col-sm-12" style='text-align: center'>
      <div id='youtube_list' class="bxslider">
@@ -80,12 +23,12 @@ footer.row{
    <div class="col-lg-4 col-sm-12">
       <div class="col-lg-12 col-sm-6 right_banner">
         <a href="${portal_url}/search_product_view">
-           <img src="https://via.placeholder.com/430x240" alt="">
+           <img src="${portal_url}/products/@@images/image/preview" alt="工業用紗線">
         </a>
       </div>
       <div class="col-lg-12 col-sm-6 right_banner">
         <a href="${portal_url}/search_polyester_view">
-           <img src="https://via.placeholder.com/430x240" alt="">
+           <img src="${portal_url}/polyester/@@images/image/preview" alt="機能性聚酯纖維">
         </a>
       </div>
    </div>
