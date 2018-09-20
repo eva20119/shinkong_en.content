@@ -102,10 +102,11 @@ footer#portal-footer-wrapper {
 @media (min-width: 1200px) {
     footer#portal-footer-wrapper {
         width: 1170px;
-/*        margin-right: auto;
-        margin-left: auto;
-        padding-left: 15px;
-        padding-right: 15px;
-        max-width: 100%; */
+    }
+}
+
+@media (min-width: 1600px) {
+    footer#portal-footer-wrapper {
+        width: 1570px;
     }
 }
