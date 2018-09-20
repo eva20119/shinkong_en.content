@@ -10,14 +10,16 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+
 <style>
+/*
 #content header, #viewlet-below-content{
     display: none;
 }
 #content{
     position: relative;
     margin: 0;
-}
+}*/
 #youtube_list{
     position: relative;
     padding: 10px;
@@ -33,6 +35,7 @@ iframe{
     width: 96%;
     height: 450px;
 }
+/*
 .row{
 }
 
@@ -62,24 +65,18 @@ footer.row{
 .dot_select{
     background: red !important;
     color: red !important;
-}
+}*/
 </style>
+
 <div class="row banner_container">
    <div class="col-lg-8 col-sm-12" style='text-align: center'>
-     <div id='youtube_list'>
-       <tal:rep repeat="youtube view/youtubeList">
-         <div tal:define="number repeat/youtube/number" id='youtube${number}' 
-              class="${python: 'hide'  if number > 1 else ''}">
-           <p tal:replace="structure python: youtube.getObject().remoteUrl"></p>
-         </div>
+     <div id='youtube_list' class="bxslider">
+       <tal:rep repeat="item view/youtubeList">
+           <div tal:content="structure python:item.getObject().remoteUrl">I am a slide.</div>
        </tal:rep>
      </div>
-     <ul id='youtube_select'>
-       <li tal:repeat="youtube view/youtubeList" data-id="youtube${repeat/youtube/number}">
-         <span tal:define="number repeat/youtube/number" class="${python: 'dot' if number > 1 else 'dot dot_select'}">a</span>
-       </li>
-     </ul>
    </div>
+
    <div class="col-lg-4 col-sm-12">
       <div class="col-lg-12 col-sm-6 right_banner">
         <a href="${portal_url}/search_product_view">
@@ -96,76 +93,28 @@ footer.row{
 
 
 <div class="row product_container">
-  <div class="col-lg-3 col-sm-6" tal:repeat="item python: view.cover.getObject().application" style='text-align: center'>
+  <div class="col-lg-3 col-sm-6 item" tal:repeat="item python: view.cover.getObject().application">
     <a href="${portal_url}/search_product_view?uid=${python: item.to_object.UID()}">
-      <img src="${item/to_object/absolute_url}/@@images/image" style='height:260px;margin-bottom: 10px'><h3>${item/to_object/Title}</h3>
+      <img src="${item/to_object/absolute_url}/@@images/image">
     </a>
+    <h5>${item/to_object/Title}</h5>
   </div>
 </div>
 
 <div class="row polyester_container">
-  <div class="col-lg-3 col-sm-6" tal:repeat="item python: view.cover.getObject().polyester" style='padding: 10px'>
+  <div class="col-lg-4 col-sm-6 item" tal:repeat="item python: view.cover.getObject().polyester">
     <a data-fancybox href="${python: item.to_object.absolute_url()}/@@images/dm/preview" class='polyester_result'>
-        <img src="${python: item.to_object.absolute_url()}/@@images/cover/preview" style='width: 100%'>
-    </a>
+        <img src="${python: item.to_object.absolute_url()}/@@images/cover/preview">
+    </a><br>
+    <span>${item/to_object/title}</span>
   </div>
 </div>
 
-<?python
-from datetime import datetime
-year = datetime.now().year
-?>
-<footer id="new_footer" style='border: none'>
-                <div class="row">
-<hr style='width: 95%;color: red;background: red;height: 2px;border:none;margin-bottom: 30px'>
-                    <div class="col-lg-4 col-sm-12">
-                        <a href="" class="top_icon">
-                            <img src="${view/logo}" alt="">
-                        </a>
-                        <p>永續成長的高科技聚酯產業</p>
-                    </div>
-                    <div class="col-lg-4 col-sm-12 footer_sec">
-                        <h3 style='margin-top:0;margin-bottom: 10px'>聯絡我們</h3>
-                        <ul>
-                            <li>${view/address}
-                                <a href="https://www.google.com.tw/maps/search/${view/address}" target="_blank">
-                                    <span class="icon-gray-triangle"></span>詳細地圖
-                                </a>
-                            </li>
-                            <li>TEL/${view/cellphone}</li>
-                            <li>FAX/${view/fax}</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-sm-12 footer_thr">
-                        <ul class='site_map'>
-                            <li>網站地圖</li>
-                            <li>/</li>
-                            <li>使用條款</li>
-                            <li>/</li>
-                            <li>隱私權保護說明</li>
-                        </ul>
-                        <p>©${year}新光合成纖維股份有限公司SHINKONG</p>
-                        <div class='footer_container'>
-                            <a href="" class='icon_email'></a>
-                            <a href="" class='icon_sk21'></a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
 
 <script>
-$(function(){
-        $('#youtube_select li').click(function(){
-            id = $(this).data()['id']
-            $(this).find('.dot').addClass('dot_select')
-            $(this).siblings().find('.dot').removeClass('dot_select')
-
-            $('#' + id).siblings().fadeOut()
-            setTimeout(function(){
-                $('#' + id).fadeIn()
-            }, 400)
-        })
-})
+    $(document).ready(function(){
+      $('.bxslider').bxSlider();
+    });
 </script>
 
 </metal:content-core>

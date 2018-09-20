@@ -33,13 +33,23 @@
         layer="shinkong.content.interfaces.IShinkongContentLayer"
         permission="zope2.View"
     />
-
+<!--
     <browser:viewlet
         name="cover_youtube"
         for="*"
         manager="plone.app.layout.viewlets.interfaces.IBelowContent"
         template="new_footer.pt"
         class=".viewlet.NewFooter"
+        layer="shinkong.content.interfaces.IShinkongContentLayer"
+        permission="zope2.View"
+    />
+-->
+    <browser:viewlet
+        name="sk_header"
+        for="*"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        template="sk_header.pt"
+        class=".viewlet.SKHeader"
         layer="shinkong.content.interfaces.IShinkongContentLayer"
         permission="zope2.View"
     />

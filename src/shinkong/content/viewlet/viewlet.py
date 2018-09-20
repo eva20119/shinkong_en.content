@@ -29,3 +29,6 @@ class NewFooter(base.ViewletBase):
     def update(self):
         context = self.context
         self.logo = getSiteLogo()
+
+class SKHeader(base.ViewletBase):
+    """  """
