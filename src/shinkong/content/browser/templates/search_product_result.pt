@@ -15,13 +15,101 @@
 .email_table{
    text-align: left;
 }
+td{
+    padding: 8px 0px;
+}
+tr:first-child td{
+    vertical-align: middle;
+    background: #ccc;
+}
+.mobile{
+    display: none;
+}
+@media(max-width: 700px){
+.mobile{
+    display: table;
+}
+.desktop{
+    display: none;
+}
+.col-md-8{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.email_table input{
+    width: 50%;
+}
+}
 </style>
+<table class='mobile'>
+    <tr>
+      <td>Spec.<br>No.</td>
+      <td>D/F</td>
+      <td>Tenacity<br>(g/D)</td>
+      <td>Elongation<br>(%)</td>
+      <td>H.A.S<br>(%)</td>
+      <td>REMARK<br>EASL</td>
+    </tr>
+  <tal:rep repeat="item view/filterProduct">
+    <tr tal:define="obj python: item.getObject()">
+      <td>${python: obj.title}</td>
+      <td>${python: '%s/%s' %(obj.denier, obj.filament)}</td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.high_tenacity, obj.high_tenacity_difference)"></td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.elongation, obj.elongation_difference)"></td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.has2, obj.has2_difference)"></td>
+      <td>${python: obj.easl_remark}</td>
+    </tr>
+  </tal:rep>
+</table>
+
+<table class='desktop'>
+    <tr>
+      <td>Spec.No.</td>
+      <td>Titer(denier)</td>
+      <td>Filaments</td>
+      <td>Tenacity(g/D)</td>
+      <td>Elongation(%)</td>
+      <td>H.A.S(2)(%)</td>
+      <td>EASL</td>
+      <td>paper tube length<br>(mm)</td>
+      <td>aa yarn</td>
+      <td>TYPE REMARK</td>
+      <td>REMARK<br>EASL</td>
+    </tr>
+  <tal:rep repeat="item view/filterProduct">
+    <tr tal:define="obj python: item.getObject()">
+      <td>${python: obj.title}</td>
+      <td>${python: obj.denier}</td>
+      <td>${python: obj.filament}</td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.high_tenacity, obj.high_tenacity_difference)"></td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.elongation, obj.elongation_difference)"></td>
+      <td tal:content="structure python: '%s&#177;%s' %(obj.has2, obj.has2_difference)"></td>
+      <td>${python: obj.easl}</td>
+      <td>${python: obj.ptl}</td>
+      <td tal:content="structure python: '&#8730' if obj.aayarn else ''"></td>
+      <td>${python: obj.type_remark}</td>
+      <td>${python: obj.easl_remark}</td>
+    </tr>
+  </tal:rep>
+</table>
+<br><br>
+<div style='text-align: left'>
+<h4>REMARK：</h4>
+<h4>1、Test Method：Astm-D885(M/C:TEXTECHNO STATIMAT-4  with 60 tpm)</h4>
+<h4>2、Quality Standard：IS0-9001(Q.M.S)    ISO-14001(E.M.S)</h4>
+<h4>3、Hot air shrinkage，177℃，2min   MKⅢ</h4>
+<h4>4、Interlace： Yes.      5、Twist： zero    6、Luster ：full bright (FB)</h4>
+</div>
+
 
 <div class='email_table'>
+  <h2>聯絡我們</h2>
   <div>
     <span class='required_start'>*</span>
-    Name：First Name<input type="text" id="first_name">
-        Last Name <input type="text" id='last_name'>
+    First Name<input type="text" id="first_name">
+    <br> <br>
+    <span class='required_start'>*</span>
+    Last Name <input type="text" id='last_name'>
   </div>
 <br>
   Company：<input type="text" id="company" >
@@ -34,6 +122,7 @@
 <br>
 <br>
   <span class='required_start'>*</span>Phone：<input type="text" id="phone" >
+<br><br>
   <span class='required_start'>*</span>Cell Phone：<input type="text" id="cellphone" >
 <br><br>
   Message：<textarea id="msg" cols="30" rows="10"></textarea>
@@ -43,46 +132,7 @@
 
 <div id='verify' ></div>
 <br><br>
-<table>
-  <tal:rep repeat="item view/filterProduct">
-    <tr>
-      <td rowspan=2>Spec.No.</td>
-      <td>Titer</td>
-      <td>Spec.No.</td>
-      <td rowspan=2>Filaments</td>
-      <td>Tenacity</td>
-      <td>Elongation</td>
-      <td>H.A.S(%)</td>
-      <td rowspan=2>EASL</td>
-      <td>paper tube</td>
-      <td>AA</td>
-      <td>TYPE</td>
-    </tr>
-    <tr>
-      <td>(denier)</td>
-      <td>(g/D)</td>
-      <td>(%)</td>
-      <td>177&#176C*2min</td>
-      <td>length(mm)</td>
-      <td>yarn</td>
-      <td>REMARK</td>
-      <td>REMARK</td>
-    </tr>
-    <tr tal:define="obj python: item.getObject()">
-      <td>${python: obj.title}</td>
-      <td>${python: obj.denier}</td>
-      <td>${python: obj.filament}</td>
-      <td>${python: obj.high_tenacity}</td>
-      <td>${python: obj.elongation}</td>
-      <td>${python: obj.has2}</td>
-      <td>${python: obj.easl}</td>
-      <td>${python: obj.ptl}</td>
-      <td>${python: obj.aayarn}</td>
-      <td>${python: obj.type_remark}</td>
-      <td>${python: obj.easl_remark}</td>
-    </tr>
-  </tal:rep>
-</table>
+
 
 <p id='verify_text' style='display: none'></p>
 <script>
@@ -139,4 +189,13 @@
 
 <tal:condition condition='not: view/filterProduct'>
   <h1>No Data</h1>
+  <h3>若需要有更多產品諮詢請與我們聯絡! </h3>
+  <h4>
+     Danny Zou 鄒汶修 <br>
+     Tel:+886-2-25071251 ext 7806 <br>
+     Fax:+886-2-25066812 <br>
+     E-mail：sk33430@shinkong.com.tw <br>
+     WeChat:DannyZeo<br>
+  </h4>
+
 </tal:condition>

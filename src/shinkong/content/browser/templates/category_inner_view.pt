@@ -16,7 +16,7 @@
 }
 </style>
 
-<div>
+<div style='background: white'>
   <div class='col-md-6' style='text-align: center;margin-top: 30px'>
     <img src="${view/context/absolute_url}/@@images/image/preview" style='width: unset'>
   </div>
@@ -27,7 +27,7 @@
 
     <p tal:content="structure view/context/text/raw"></p>
   </div>
-
+  <div style='clear:both'/>
 </div>
 
 </metal:content-core>

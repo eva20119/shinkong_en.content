@@ -27,8 +27,8 @@ class CoverView(BrowserView):
     template = ViewPageTemplateFile("templates/cover_view.pt")
     def __call__(self):
         portal = api.portal.get()
-        self.cover = api.content.find(context=portal['cover'], depth=0)[0]
-        self.youtubeList = api.content.find(context=portal['cover'], depth=1)
+        self.cover = api.content.find(context=portal['index_html'], depth=0)[0]
+        self.youtubeList = api.content.find(context=portal['index_html'], depth=1)
         self.fax = api.portal.get_registry_record('fax', interface=IInform)
         self.address = api.portal.get_registry_record('address', interface=IInform)
         self.cellphone = api.portal.get_registry_record('cellphone', interface=IInform)
@@ -67,6 +67,12 @@ class SendMail(BrowserView):
 class SearchPolyesterView(BrowserView):
     template = ViewPageTemplateFile('templates/search_polyester_view.pt')
     def __call__(self):
+        query = {
+            'portal_type': 'polyester',
+            'review_state': 'published'
+        }
+        self.result = api.content.find(**query)
+
         return self.template()
 
 
@@ -77,11 +83,10 @@ class SearchPolyesterResult(BrowserView):
         subject = request.get('subject')
         query = {
             'portal_type': 'polyester',
-#            'review_state': 'published',
+            'review_state': 'published',
             'SearchableText': '%s*' %subject
         }
         self.result = api.content.find(**query)
-
         return self.template()
 
 
@@ -130,13 +135,10 @@ class SearchProductResult(BrowserView):
             denier = float(denier)
             sqlInstance = SqlObj()
 
-            sqlStr = """INSERT INTO search_log(denier, filament, ht, el, has2) VALUES({}, {}, {}, {}, {})
-                    """.format(denier, filament, high_tenacity, elongation, has2)
-            sqlInstance.execSql(sqlStr)
-
             query = {
                 'context': portal['products'],
                 'portal_type': 'product',
+                'review_state': 'published',
                 'index_filament' : filament,
                 'index_denier' : denier
             }
@@ -153,6 +155,17 @@ class SearchProductResult(BrowserView):
                 query['index_el_min'] = {'query': elongation, 'range': 'max'}
                 query['index_el_max'] = {'query': elongation, 'range': 'min'}
             filterProduct = api.content.find(**query)
+
+            if not high_tenacity:
+                high_tenacity = 'NULL'
+            if not has2:
+                has2 = 'NULL'
+            if not elongation:
+                elongation = 'NULL'
+
+            sqlStr = """INSERT INTO search_log(denier, filament, ht, el, has2) VALUES({}, {}, {}, {}, {})
+                    """.format(denier, filament, high_tenacity, elongation, has2)
+            sqlInstance.execSql(sqlStr)
 
             self.filterProduct = filterProduct if filterProduct else False
             return self.template()

@@ -46,47 +46,88 @@
 #left_side{
     text-align: left;
 }
+.mobile_option{
+    display: none;
+}
+@media(max-width: 700px){
+.mobile_option{
+    display: block;
+}
+.desktop_option{
+    display: none;
+}
+
+}
 </style>
 
 <div id='product_container'>
-<span style='color: red;font-size:17px'>*為必填</span>
-<br><br>
-<span style='color: red;font-size:17px'>*</span>
-<select id="denier">
-    <option value="">請選擇丹寧數</option>
-</select>
 
-<div style="display: none" id='optionContainer'>
-    <span style='color: red;font-size:17px'>*</span>
-    <select name="" id="filament" >
-    </select>
-    <input type='number' min='0' id='high_tenacity' step='0.1' placeholder="強度">
-
-    <input type='number' min='0' id='elongation' placeholder="伸度">
-
-    <input type='number' min='0' id='has2' step='0.1' placeholder="HAS2">
-</div>
-
-<button id='search_btn'>Search</button>
-
-<br>
-<div id="left_side" class='col-md-3'>
+<div id="left_side" class='col-md-2'>
   <tal:rep repeat="item view/category_folder">
     <h3>${item/Title}</h3>
     <h4 tal:repeat="child python: item.getObject().getChildNodes()" data-uid="${child/UID}"
         class='search_category'>${child/title}</h4>
   </tal:rep>
 </div>
+<div class='col-md-2 mobile_option'>
+<span style='color: red;font-size:17px'>*為必填</span>
+<br><br>
+<span style='color: red;font-size:17px'>*</span>
+<select id="mobile_denier">
+    <option value="">丹寧數</option>
+</select>
+<br><br>
+<span style='color: red;font-size:17px'>*</span>
+<select name="" id="mobile_filament"  disabled>
+  <option value="">根數</option>
+</select>
+<br><br>
+<input type='number' min='0' id='mobile_high_tenacity' step='0.1' placeholder="強度" disabled>
+<br>
+<input type='number' min='0' id='mobile_elongation' placeholder="伸度" disabled>
+<br>
+<input type='number' min='0' id='mobile_has2' step='0.1' placeholder="HAS2" disabled>
+<br>
+<button id='mobile_search_btn'>Search</button>
+</div>
 
-<div id='result' class='col-md-9'>
+<div id='result' class='col-md-8'>
 
 </div>
+
+<div class='col-md-2 desktop_option'>
+<span style='color: red;font-size:17px'>*為必填</span>
+<br><br>
+<span style='color: red;font-size:17px'>*</span>
+<select id="denier">
+    <option value="">丹寧數</option>
+</select>
+<br><br>
+<span style='color: red;font-size:17px'>*</span>
+<select name="" id="filament"  disabled>
+  <option value="">根數</option>
+</select>
+<br><br>
+<input type='number' min='0' id='high_tenacity' step='0.1' placeholder="強度" disabled>
+<br>
+<input type='number' min='0' id='elongation' placeholder="伸度" disabled>
+<br>
+<input type='number' min='0' id='has2' step='0.1' placeholder="HAS2" disabled>
+<br>
+<button id='search_btn'>Search</button>
 </div>
+
+<div style='clear:both'/>
+
 <script>
 $(function(){
     Object.keys(${view/denierDict}).forEach(function(e){
         $('#denier').append("<option value=" + e + ">" + e + "</option>");
     })
+    Object.keys(${view/denierDict}).forEach(function(e){
+        $('#mobile_denier').append("<option value=" + e + ">" + e + "</option>");
+    })
+
     url = new URL(location.href)
     uid = url["search"].split('?uid=')[1]
     if(uid){
@@ -119,24 +160,49 @@ $(function(){
         denierDict = ${view/denierDict}
         val = $(this).val()
         if(denierDict[val]){
-            $('#optionContainer').show();
-            $('#optionContainer').css('display', 'inline')
+            $('#filament').prop('disabled', false)
+            $('#high_tenacity').prop('disabled', false)
+            $('#elongation').prop('disabled', false)
+            $('#has2').prop('disabled', false)
             $('#filament').html("");
             $('#filament').append("<option value=''>根數</option>")
             denierDict[val].forEach(e => {
                 $('#filament').append("<option value=" + e + ">" + e + "</option>");
             });
         }else{
-            $('#optionContainer').hide();
+            $('#filament').prop('disabled', true)
+            $('#high_tenacity').prop('disabled', true)
+            $('#elongation').prop('disabled', true)
+            $('#has2').prop('disabled', true)            
         }
     });
+    $('#mobile_denier').change(function () {
+        denierDict = ${view/denierDict}
+        val = $(this).val()
+        if(denierDict[val]){
+            $('#mobile_filament').prop('disabled', false)
+            $('#mobile_high_tenacity').prop('disabled', false)
+            $('#mobile_elongation').prop('disabled', false)
+            $('#mobile_has2').prop('disabled', false)
+            $('#mobile_filament').html("");
+            $('#mobile_filament').append("<option value=''>根數</option>")
+            denierDict[val].forEach(e => {
+                $('#mobile_filament').append("<option value=" + e + ">" + e + "</option>");
+            });
+        }else{
+            $('#mobile_filament').prop('disabled', true)
+            $('#mobile_high_tenacity').prop('disabled', true)
+            $('#mobile_elongation').prop('disabled', true)
+            $('#mobile_has2').prop('disabled', true)
+        }
+    });
+
     $('#search_btn').click(function(){
         denier = $("#denier").val();
         high_tenacity = $('#high_tenacity').val()
         elongation = $('#elongation').val()
         has2 = $('#has2').val()
         filament = $("#filament").val()
-
         count = 0
         if(!denier){
             alert('請選擇丹寧數')
@@ -146,20 +212,6 @@ $(function(){
             alert('請選擇根數')
             return
         }
-        if(high_tenacity){
-            count += 1
-        }
-        if(elongation){
-            count += 1
-        }
-        if(has2){
-            count += 1
-        }
-        if(count == 0){
-            alert('長度,伸度,HAS2請至少填寫一個')
-            return
-        }
-
         data = {
             'filament': filament,
             'high_tenacity': high_tenacity,
@@ -177,6 +229,40 @@ $(function(){
             }
         });    
     })
+
+    $('#mobile_search_btn').click(function(){
+        denier = $("#mobile_denier").val();
+        high_tenacity = $('#mobile_high_tenacity').val()
+        elongation = $('#mobile_elongation').val()
+        has2 = $('#mobile_has2').val()
+        filament = $("#mobile_filament").val()
+        count = 0
+        if(!denier){
+            alert('請選擇丹寧數')
+            return
+        }
+        if(!filament){
+            alert('請選擇根數')
+            return
+        }
+        data = {
+            'filament': filament,
+            'high_tenacity': high_tenacity,
+            'elongation': elongation,
+            'has2': has2,
+            'denier': denier
+        }
+        url = '${portal_url}/search_product_result'
+        $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            success: function (rep) {
+                $('#result').html(rep)
+            }
+        });
+    })
+
 })
 </script>
 

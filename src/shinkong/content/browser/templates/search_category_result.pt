@@ -1,10 +1,17 @@
-<img src="${view/result/absolute_url}/@@images/image/preview" style="width: unset">
+<div class='bxslider' style='width: 800px' tal:condition="python: view.result.image1 or view.result.image2 or view.result.image3">
+  <img src="${view/result/absolute_url}/@@images/image1/preview" style="width: unset; height: 300px" tal:condition="view/result/image1">
+  <img src="${view/result/absolute_url}/@@images/image2/preview" style="width: unset; height: 300px" tal:condition="view/result/image2">
+  <img src="${view/result/absolute_url}/@@images/image3/preview" style="width: unset; height: 300px" tal:condition="view/result/image3">
+</div>
 <h2>${view/result/Title}</h2>
 <h4>${view/result/description}</h4>
-
+<?python
+from plone import api
+?>
 <div class="col-md-12">
     <div class="row">
-        <div tal:repeat="child view/result/getChildNodes" class='childContainer col-md-12'>
+      <tal:rep repeat="child view/result/getChildNodes">
+        <div tal:condition="python: api.content.get_state(obj=child) == 'published'" class='childContainer col-md-12'>
           <a href="${child/absolute_url}/@@category_inner_view">
             <img src="${child/absolute_url}/@@images/image/mini" class='col-md-4'>
           </a>
@@ -13,5 +20,13 @@
                 <p>${child/description}</p>
             </div>
         </div>
+      </tal:rep>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+      $('.bxslider').bxSlider();
+    });
+</script>
+

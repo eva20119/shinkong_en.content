@@ -38,7 +38,7 @@
 <div class="row product_container">
   <div class="col-lg-3 col-sm-6 item" tal:repeat="item python: view.cover.getObject().application">
     <a href="${portal_url}/search_product_view?uid=${python: item.to_object.UID()}">
-      <img src="${item/to_object/absolute_url}/@@images/image">
+      <img src="${item/to_object/absolute_url}/@@images/image1">
     </a>
     <h5>${item/to_object/Title}</h5>
   </div>
@@ -46,7 +46,7 @@
 
 <div class="row polyester_container">
   <div class="col-lg-4 col-sm-6 item" tal:repeat="item python: view.cover.getObject().polyester">
-    <a data-fancybox href="${python: item.to_object.absolute_url()}/@@images/dm/preview" class='polyester_result'>
+    <a data-fancybox href="${python: item.to_object.absolute_url()}/@@images/dm" class='polyester_result'>
         <img src="${python: item.to_object.absolute_url()}/@@images/cover/preview">
     </a><br>
     <span>${item/to_object/title}</span>

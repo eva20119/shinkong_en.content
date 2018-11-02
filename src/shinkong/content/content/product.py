@@ -20,26 +20,32 @@ class IProduct(model.Schema):
     )
     high_tenacity = schema.Float(
         title=_(u'High Tenacity'),
+        default=0.0,
         required=True
     )
     high_tenacity_difference = schema.Float(
         title=_(u'High Tenacity Difference'),
+        default=0.0,
         required=True
     )
     elongation = schema.Float(
         title=_(u'Elongation'),
+        default=0.0,
         required=True
     )
     elongation_difference = schema.Float(
         title=_(u'Elongation Difference'),
+        default=0.0,
         required=True
     )
     has2 = schema.Float(
         title=_(u'H.A.S(2)'),
+        default=0.0,
         required=True
     )
     has2_difference = schema.Float(
         title=_(u'H.A.S(2) Difference'),
+        default=0.0,
         required=True
     )
     denier = schema.Int(
@@ -50,12 +56,12 @@ class IProduct(model.Schema):
         title=_(u'filament'),
         required=True
     )
-    easl = schema.TextLine(
-        title=_(u'EASL'),
-        required=False
-    )
     easl_remark = schema.TextLine(
         title=_(u'EASL Remark'),
+        required=False
+    )
+    easl = schema.TextLine(
+        title=_(u'EASL'),
         required=False
     )
     ptl = schema.TextLine(
@@ -70,10 +76,6 @@ class IProduct(model.Schema):
     type_remark = schema.TextLine(
         title=_(u'Type Remark'),
         required=False
-    )
-    image = NamedBlobImage(
-        title=_(u"Product Image"),
-        required=True,
     )
 
 

@@ -1,9 +1,8 @@
 
 <tal:rep repeat="item view/result">
-<div class="col-lg-4 col-sm-6" style='margin: 5px 0'>
-  <a data-fancybox href="${python: item.getObject().absolute_url()}/@@images/dm/preview" class='polyester_result'>
+<div class="col-lg-3 col-sm-6" style='margin: 5px 0'>
+  <a data-fancybox href="${python: item.getObject().absolute_url()}/@@images/dm/large" class='polyester_result'>
       <img src="${python: item.getObject().absolute_url()}/@@images/cover/preview" style='width: 100%'>
   </a>
 </div>
 </tal:rep>
-
