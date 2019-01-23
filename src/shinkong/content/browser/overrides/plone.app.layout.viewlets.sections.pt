@@ -39,5 +39,9 @@
       </div>
     </div>
   </nav>
-
+<script>
+$(function(){
+    $('#portaltab-index_html a').text("HOME PAGE")
+})
+</script>
 </tal:sections>
