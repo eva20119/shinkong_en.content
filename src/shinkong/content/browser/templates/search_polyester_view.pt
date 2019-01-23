@@ -7,10 +7,14 @@
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="gct.content">
 
+<metal:block fill-slot="javascript_head_slot">
+<script src="${portal_url}/++plone++shinkong.content/vue.js"></script>
+</metal:block>
 <body>
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+
 <style>
 .documentFirstHeading{
     display: none;
@@ -21,8 +25,10 @@
     padding-left: 0;
 }
 </style>
-    <input type="search" id="subject" value="" placeholder="Search Subject Here..."  style='display: inline;width: 70%'>
-    <button id='send' style='color: white;background: #3d84a8;padding: 8px;border-radius: 8px;font-size: 18px'>關鍵字搜尋</button>
+
+<div >
+    <input type="search" id="subject"   
+         placeholder="Search Subject Here..."  style='display: inline;width: 70%'>
 <br>
 
 <div id='result'>
@@ -39,19 +45,14 @@
 <br>
 <div style='background: white;clear: both;padding: 5px;text-align: center'>
 
-<h3>若需要有更多產品諮詢請與我們聯絡! </h3>
-
-<h4>產品負責人訊息:Eric Yao 姚源孝 </h4>
-<h4>TEL: 02-2507-1251#7330 </h4>
-<h4>FAX: 02-2506-6812 </h4>
-<h4>E-mail：yhyao@shinkong.com.tw	
-</h4>
+<h3>Cannot find what you want? Please contact us~ </h3>
+<h4>Mr. Eric Yao +886-2-25071251#7330 yhyao@shinkong.com.tw</h4> 
+</div>
 </div>
 
 <script>
 $(function(){
-    $('#send').click(function(){
-          
+    $('#subject').change(function(){
         url = '${portal_url}/search_polyester_result'
         val = $('#subject').val()
         data = {'subject': val}
@@ -61,6 +62,8 @@ $(function(){
             url: url,
             success: function(rep){
                 $('#result').html(rep)
+                $('#result').hide()
+                $('#result').fadeIn('slow')
             }
         })
     })
@@ -68,6 +71,7 @@ $(function(){
 </script>
 </metal:content-core>
 </metal:content-core>
+
 
 </body>
 </html>

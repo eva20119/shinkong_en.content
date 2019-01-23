@@ -37,6 +37,7 @@
 }
 #result{
     margin-top: 30px;
+    paddingBottom: 20px;
 }
 #new_footer .footer_sec h3{ 
     margin-top: 0;
@@ -64,27 +65,27 @@
 
 <div id="left_side" class='col-md-2'>
   <tal:rep repeat="item view/category_folder">
-    <h3>${item/Title}</h3>
+    <p style="font-size: 20px;border-bottom: 1px solid blue;border-bottom-width: 2px;width: 135px">${item/Title}</p>
     <h4 tal:repeat="child python: item.getObject().getChildNodes()" data-uid="${child/UID}"
         class='search_category'>${child/title}</h4>
   </tal:rep>
 </div>
 <div class='col-md-2 mobile_option'>
-<span style='color: red;font-size:17px'>*為必填</span>
+<span style='color: red;font-size:17px'>*necessary</span>
 <br><br>
 <span style='color: red;font-size:17px'>*</span>
 <select id="mobile_denier">
-    <option value="">丹寧數</option>
+    <option value="">Denier</option>
 </select>
 <br><br>
 <span style='color: red;font-size:17px'>*</span>
 <select name="" id="mobile_filament"  disabled>
-  <option value="">根數</option>
+  <option value="">Filaments</option>
 </select>
 <br><br>
-<input type='number' min='0' id='mobile_high_tenacity' step='0.1' placeholder="強度" disabled>
+<input type='number' min='0' id='mobile_high_tenacity' step='0.1' placeholder="Tenacity" disabled>
 <br>
-<input type='number' min='0' id='mobile_elongation' placeholder="伸度" disabled>
+<input type='number' min='0' id='mobile_elongation' placeholder="Elongation" disabled>
 <br>
 <input type='number' min='0' id='mobile_has2' step='0.1' placeholder="HAS2" disabled>
 <br>
@@ -96,21 +97,21 @@
 </div>
 
 <div class='col-md-2 desktop_option'>
-<span style='color: red;font-size:17px'>*為必填</span>
+<span style='color: red;font-size:17px'>*necessary</span>
 <br><br>
 <span style='color: red;font-size:17px'>*</span>
 <select id="denier">
-    <option value="">丹寧數</option>
+    <option value="">Denier</option>
 </select>
 <br><br>
 <span style='color: red;font-size:17px'>*</span>
 <select name="" id="filament"  disabled>
-  <option value="">根數</option>
+  <option value="">Filaments</option>
 </select>
 <br><br>
-<input type='number' min='0' id='high_tenacity' step='0.1' placeholder="強度" disabled>
+<input type='number' min='0' id='high_tenacity' step='0.1' placeholder="Tenacity" disabled>
 <br>
-<input type='number' min='0' id='elongation' placeholder="伸度" disabled>
+<input type='number' min='0' id='elongation' placeholder="Elongation" disabled>
 <br>
 <input type='number' min='0' id='has2' step='0.1' placeholder="HAS2" disabled>
 <br>
@@ -165,7 +166,7 @@ $(function(){
             $('#elongation').prop('disabled', false)
             $('#has2').prop('disabled', false)
             $('#filament').html("");
-            $('#filament').append("<option value=''>根數</option>")
+            $('#filament').append("<option value=''>Filament</option>")
             denierDict[val].forEach(e => {
                 $('#filament').append("<option value=" + e + ">" + e + "</option>");
             });
@@ -185,7 +186,7 @@ $(function(){
             $('#mobile_elongation').prop('disabled', false)
             $('#mobile_has2').prop('disabled', false)
             $('#mobile_filament').html("");
-            $('#mobile_filament').append("<option value=''>根數</option>")
+            $('#mobile_filament').append("<option value=''>Filament</option>")
             denierDict[val].forEach(e => {
                 $('#mobile_filament').append("<option value=" + e + ">" + e + "</option>");
             });
@@ -205,11 +206,11 @@ $(function(){
         filament = $("#filament").val()
         count = 0
         if(!denier){
-            alert('請選擇丹寧數')
+            alert('Please select denier')
             return 
         }
         if(!filament){
-            alert('請選擇根數')
+            alert('Please select filament')
             return
         }
         data = {
@@ -238,11 +239,11 @@ $(function(){
         filament = $("#mobile_filament").val()
         count = 0
         if(!denier){
-            alert('請選擇丹寧數')
+            alert('Please select denier')
             return
         }
         if(!filament){
-            alert('請選擇根數')
+            alert('Please select filament')
             return
         }
         data = {

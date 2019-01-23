@@ -1,3 +1,7 @@
+<?python
+from plone import api
+portal_url = api.portal.get().absolute_url()
+?>
 <tal:condition condition='view/filterProduct'>
 <script src='https://www.google.com/recaptcha/api.js?render=explicit&onload=onReCaptchaLoad'></script>
 <style>
@@ -38,7 +42,6 @@ tr:first-child td{
 }
 .email_table input{
     width: 50%;
-}
 }
 </style>
 <table class='mobile'>
@@ -101,9 +104,13 @@ tr:first-child td{
 <h4>4、Interlace： Yes.      5、Twist： zero    6、Luster ：full bright (FB)</h4>
 </div>
 
+<div style="text-align: left">
+  <h2>Download File</h2>
+  <a href="${portal_url}/system_file/download_pdf/@@download/file/${python: view.download_file[0].getObject().file.filename}">${python: view.download_file[0].getObject().file.filename}</a>
+</div>
 
 <div class='email_table'>
-  <h2>聯絡我們</h2>
+  <h2>Contact us</h2>
   <div>
     <span class='required_start'>*</span>
     First Name<input type="text" id="first_name">
@@ -156,7 +163,7 @@ tr:first-child td{
     cellphone = $('#cellphone').val();
     msg = $('#msg').val();
     if(!first_name || !last_name || !email || !country || !phone || !cellphone){
-      alert('必填欄位未填')
+      alert('The necessary need key in')
       return
     }
     url = location.href.replace('search_product_view', 'send_mail')
@@ -176,9 +183,9 @@ tr:first-child td{
       data: data,
       success: function (response) {
         if(response == 'success'){
-          alert('寄件成功')
+          alert('Send mail success')
         }else if(response == 'error'){
-          alert('寄件失敗')
+          alert('Send mail fail')
         }
       }
     });
@@ -188,14 +195,9 @@ tr:first-child td{
 </tal:condition>
 
 <tal:condition condition='not: view/filterProduct'>
-  <h1>No Data</h1>
-  <h3>若需要有更多產品諮詢請與我們聯絡! </h3>
-  <h4>
-     Danny Zou 鄒汶修 <br>
-     Tel:+886-2-25071251 ext 7806 <br>
-     Fax:+886-2-25066812 <br>
-     E-mail：sk33430@shinkong.com.tw <br>
-     WeChat:DannyZeo<br>
-  </h4>
+  <h3>Cannot find what you want? Please contact us~ </h3>
+  <h4>Mr. Morgan Hsu +886-2-25071251#7501 bromophen@shinkong.com.tw </h4>
+  <h4>Mr. Tony Liao +886-2-25071251#7806 sk34021@shinkong.com.tw</h4>
+  <h4>Mr. Danny Zou +886-2-25071251#7812 sk33430@shinkong.com.tw</h4>
 
 </tal:condition>
